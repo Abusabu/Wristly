@@ -352,25 +352,36 @@
             border: 1px solid var(--border);
         }
 
-        .thumbnail-row {
+        /* Color Swatches CSS */
+        .color-picker-section {
+            margin: 15px 0;
+        }
+
+        .color-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .color-swatches {
             display: flex;
             gap: 10px;
         }
 
-        .thumb-img {
-            width: 70px;
-            height: 70px;
-            object-fit: cover;
-            border-radius: 6px;
+        .color-circle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
             cursor: pointer;
-            border: 1px solid var(--border);
-            opacity: 0.6;
+            border: 2px solid var(--border);
             transition: 0.3s;
         }
 
-        .thumb-img:hover, .thumb-img.active-thumb {
-            opacity: 1;
+        .color-circle.active-color {
             border-color: var(--accent);
+            transform: scale(1.1);
+            box-shadow: 0 0 10px var(--accent-glow);
         }
 
         .detail-info-section {
@@ -582,11 +593,11 @@
                 originalPrice: "$98.00",
                 discount: "50% OFF",
                 rating: "★★★★★ (14 reviews)",
-                description: "Crafted for the modern gentleman, the Chronos Minimalist features a sleek matte black dial paired with ultra-durable stainless steel casing.",
-                images: [
-                    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=800&q=80"
+                description: "Crafted for the modern gentleman, the Chronos Minimalist features a sleek matte dial paired with ultra-durable stainless steel casing.",
+                colors: [
+                    { name: "Matte Black", hex: "#111111", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Rose Gold", hex: "#b76e79", image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Silver Steel", hex: "#c0c0c0", image: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=800&q=80" }
                 ],
                 specs: {
                     "Movement": "Japanese Quartz",
@@ -603,10 +614,10 @@
                 originalPrice: "$70.00",
                 discount: "50% OFF",
                 rating: "★★★★★ (28 reviews)",
-                description: "An epitome of elegance, the Aura Rose Gold brings refined feminine aesthetics with a shimmering dial finish and a delicate mesh bracelet.",
-                images: [
-                    "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80"
+                description: "An epitome of elegance, the Aura Rose Gold brings refined feminine aesthetics with a shimmering dial finish.",
+                colors: [
+                    { name: "Rose Gold", hex: "#b76e79", image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Classic Black", hex: "#111111", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80" }
                 ],
                 specs: {
                     "Movement": "Quartz",
@@ -623,10 +634,10 @@
                 originalPrice: "$120.00",
                 discount: "50% OFF",
                 rating: "★★★★★ (42 reviews)",
-                description: "Witness the complex machinery in action. The Vanguard Skeleton exposes the intricate automatic movement with dual-sapphire crystal displays.",
-                images: [
-                    "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80"
+                description: "Witness the complex machinery in action. The Vanguard Skeleton exposes the intricate automatic movement.",
+                colors: [
+                    { name: "Steel Silver", hex: "#c0c0c0", image: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Dark Carbon", hex: "#222222", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80" }
                 ],
                 specs: {
                     "Movement": "Automatic Mechanical",
@@ -643,10 +654,10 @@
                 originalPrice: "$90.00",
                 discount: "50% OFF",
                 rating: "★★★★★ (19 reviews)",
-                description: "High-definition retina touch display paired with full health tracking, heart rate monitors, and customizable luxury watch faces.",
-                images: [
-                    "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80"
+                description: "High-definition retina touch display paired with full health tracking and heart rate monitors.",
+                colors: [
+                    { name: "Obsidian Black", hex: "#1b1b1b", image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Alpine White", hex: "#f0f0f0", image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80" }
                 ],
                 specs: {
                     "Display": "HD AMOLED Touch",
@@ -664,9 +675,9 @@
                 discount: "50% OFF",
                 rating: "★★★★★ (8 reviews)",
                 description: "Rugged, colorful, and built for daily adventures. Shock-resistant build designed specifically for active youngsters.",
-                images: [
-                    "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80"
+                colors: [
+                    { name: "Sport Blue", hex: "#2563eb", image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Jet Black", hex: "#111111", image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80" }
                 ],
                 specs: {
                     "Display": "Digital LED",
@@ -678,6 +689,7 @@
         ];
 
         let selectedProductString = "";
+        let selectedColorName = "";
 
         function displayProducts(filteredList) {
             const grid = document.getElementById("productGrid");
@@ -686,7 +698,7 @@
                     <div class="sale-badge">${p.discount}</div>
                     <div>
                         <div class="product-img-wrapper" onclick="openProductDetail(${p.id})">
-                            <img src="${p.images[0]}" alt="${p.name}" class="product-img">
+                            <img src="${p.colors[0].image}" alt="${p.name}" class="product-img">
                         </div>
                         <div class="product-info">
                             <div class="product-title" onclick="openProductDetail(${p.id})">${p.name}</div>
@@ -699,7 +711,7 @@
                     </div>
                     <div class="card-buttons">
                         <button class="details-btn" onclick="openProductDetail(${p.id})">DETAILS</button>
-                        <button class="buy-btn" onclick="openCheckout('${p.name}', '${p.price}')">BUY NOW</button>
+                        <button class="buy-btn" onclick="openCheckout('${p.name}', '${p.price}', '${p.colors[0].name}')">BUY NOW</button>
                     </div>
                 </div>
             `).join('');
@@ -721,22 +733,29 @@
             const product = products.find(p => p.id === productId);
             if (!product) return;
 
+            selectedColorName = product.colors[0].name; // Default first color
             const modalBody = document.getElementById("detailModalBody");
             
             let specsHtml = Object.entries(product.specs).map(([key, val]) => `
                 <li>${key} <span>${val}</span></li>
             `).join('');
 
-            let thumbnailsHtml = product.images.map((img, index) => `
-                <img src="${img}" class="thumb-img ${index === 0 ? 'active-thumb' : ''}" onclick="changeMainImage('${img}', this)">
+            let colorsHtml = product.colors.map((c, index) => `
+                <div class="color-circle ${index === 0 ? 'active-color' : ''}" 
+                     style="background-color: ${c.hex};" 
+                     title="${c.name}"
+                     onclick="selectColor('${c.image}', '${c.name}', this)"></div>
             `).join('');
 
             modalBody.innerHTML = `
                 <button class="detail-close" onclick="closeProductDetail()">&times;</button>
                 <div class="gallery-section">
-                    <img src="${product.images[0]}" id="mainPreview" class="main-preview-img" alt="${product.name}">
-                    <div class="thumbnail-row">
-                        ${thumbnailsHtml}
+                    <img src="${product.colors[0].image}" id="mainPreview" class="main-preview-img" alt="${product.name}">
+                    <div class="color-picker-section">
+                        <div class="color-label">SELECT COLOR: <span id="selectedColorLabel" style="color:var(--accent);">${product.colors[0].name}</span></div>
+                        <div class="color-swatches">
+                            ${colorsHtml}
+                        </div>
                     </div>
                 </div>
                 <div class="detail-info-section">
@@ -753,25 +772,28 @@
                             ${specsHtml}
                         </ul>
                     </div>
-                    <button class="checkout-submit" onclick="closeProductDetail(); openCheckout('${product.name}', '${product.price}')">BUY NOW VIA WHATSAPP</button>
+                    <button class="checkout-submit" onclick="closeProductDetail(); openCheckout('${product.name}', '${product.price}', selectedColorName)">BUY NOW VIA WHATSAPP</button>
                 </div>
             `;
 
             document.getElementById("productDetailModal").style.display = "flex";
         }
 
-        function changeMainImage(imgSrc, thumbElement) {
+        function selectColor(imgSrc, colorName, circleElement) {
             document.getElementById("mainPreview").src = imgSrc;
-            document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active-thumb'));
-            thumbElement.classList.add('active-thumb');
+            document.getElementById("selectedColorLabel").innerText = colorName;
+            selectedColorName = colorName;
+            
+            document.querySelectorAll('.color-circle').forEach(c => c.classList.remove('active-color'));
+            circleElement.classList.add('active-color');
         }
 
         function closeProductDetail() {
             document.getElementById("productDetailModal").style.display = "none";
         }
 
-        function openCheckout(productName, productPrice) {
-            selectedProductString = `${productName} (${productPrice})`;
+        function openCheckout(productName, productPrice, colorName) {
+            selectedProductString = `${productName} [Color: ${colorName}] (${productPrice})`;
             document.getElementById("modalProductTitle").innerText = `Order: ${productName}`;
             document.getElementById("checkoutModal").style.display = "flex";
         }
