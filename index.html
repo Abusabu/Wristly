@@ -74,7 +74,6 @@
             box-shadow: 0 0 15px var(--accent-glow);
         }
 
-        /* Premium Hero Section with Background Image */
         .hero {
             position: relative;
             text-align: center;
@@ -110,422 +109,35 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 70px 20px;
+            padding: 60px 20px;
         }
 
-        .section-title {
-            font-family: 'Cinzel', serif;
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 35px;
-            letter-spacing: 2px;
-            text-align: center;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
-        }
-
-        .product-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .product-img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            background: #181818;
-        }
-
-        .product-info {
-            padding: 22px;
-        }
-
-        .product-title {
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
-        }
-
-        .product-price {
-            color: var(--accent);
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 18px;
-        }
-
-        .buy-btn {
-            width: 100%;
-            background: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--text-main);
-            padding: 12px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 14px;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .buy-btn:hover {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: #000;
-        }
-
-        /* Modal Style */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(8px);
-        }
-
-        .modal-content {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 35px;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 450px;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .modal-title {
-            font-family: 'Cinzel', serif;
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 22px;
-            letter-spacing: 1px;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            letter-spacing: 0.5px;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px 14px;
-            background: var(--bg-color);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: var(--text-main);
-            font-size: 14px;
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .checkout-submit {
-            width: 100%;
-            background: var(--accent);
-            color: #000;
-            border: none;
-            padding: 13px;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 14px;
-            letter-spacing: 1px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: 0.3s;
-        }
-
-        .checkout-submit:hover {
-            opacity: 0.9;
-            box-shadow: 0 0 15px var(--accent-glow);
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid var(--border);
-            color: var(--text-muted);
-            font-size: 13px;
-            letter-spacing: 1px;
-            margin-top: 80px;
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="logo">Wrist<span>ly</span></div>
-        <button class="cart-btn" onclick="openCart()">ORDERS INFO</button>
-    </header>
-
-    <section class="hero">
-        <h1>Define Your <span>Time</span></h1>
-        <p>Explore luxury-inspired minimalist timepieces crafted for ultimate sophistication.</p>
-    </section>
-
-    <div class="container">
-        <h2 class="section-title">FEATURED COLLECTIONS</h2>
-        <div class="products-grid" id="productGrid">
-            <!-- Dynamic Products -->
-        </div>
-    </div>
-
-    <!-- Checkout Modal -->
-    <div class="modal" id="checkoutModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-            <h3 class="modal-title" id="modalProductTitle">Complete Order</h3>
-            <form id="orderForm" onsubmit="submitOrder(event)">
-                <div class="form-group">
-                    <label>FULL NAME</label>
-                    <input type="text" id="custName" required placeholder="John Doe">
-                </div>
-                <div class="form-group">
-                    <label>PHONE NUMBER / WHATSAPP</label>
-                    <input type="text" id="custPhone" required placeholder="+1 234 567 890">
-                </div>
-                <div class="form-group">
-                    <label>SHIPPING ADDRESS</label>
-                    <textarea id="custAddress" rows="3" required placeholder="Street, City, Country, Postal Code"></textarea>
-                </div>
-                <button type="submit" class="checkout-submit">CONFIRM ORDER</button>
-            </form>
-        </div>
-    </div>
-
-    <footer>
-        &copy; 2026 WRISTLY. ALL RIGHTS RESERVED.
-    </footer>
-
-    <script>
-        const products = [
-            {
-                id: 1,
-                name: "Chronos Minimalist Black",
-                price: "$49.00",
-                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 2,
-                name: "Aura Rose Gold Edition",
-                price: "$65.00",
-                image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 3,
-                name: "Vanguard Silver Steel",
-                price: "$85.00",
-                image: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=600&q=80"
-            }
-        ];
-
-        let selectedProduct = "";
-
-        function displayProducts() {
-            const grid = document.getElementById("productGrid");
-            grid.innerHTML = products.map(p => `
-                <div class="product-card">
-                    <img src="${p.image}" alt="${p.name}" class="product-img">
-                    <div class="product-info">
-                        <div class="product-title">${p.name}</div>
-                        <div class="product-price">${p.price}</div>
-                        <button class="buy-btn" onclick="openCheckout('${p.name}', '${p.price}')">BUY NOW</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function openCheckout(productName, productPrice) {
-            selectedProduct = `${productName} (${productPrice})`;
-            document.getElementById("modalProductTitle").innerText = `Order: ${productName}`;
-            document.getElementById("checkoutModal").style.display = "flex";
-        }
-
-        function closeModal() {
-            document.getElementById("checkoutModal").style.display = "none";
-        }
-
-        function openCart() {
-            alert("Click 'Buy Now' on any watch to place an order directly!");
-        }
-
-        function submitOrder(e) {
-            e.preventDefault();
-            const name = document.getElementById("custName", "").value;
-            const phone = document.getElementById("custPhone").value;
-            const address = document.getElementById("custAddress").value;
-
-            const myWhatsAppNumber = "1234567890"; 
-            const message = `New Order for Wristly!%0A*Product:* ${selectedProduct}%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Address:* ${address}`;
-            
-            window.open(`https://wa.me/${myWhatsAppNumber}?text=${message}`, '_blank');
-            closeModal();
-        }
-
-        displayProducts();
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wristly — Timeless Elegance</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #080808;
-            --card-bg: #121212;
-            --accent: #d4af37;
-            --accent-glow: rgba(212, 175, 55, 0.3);
-            --text-main: #ffffff;
-            --text-muted: #a0a0a0;
-            --border: #222222;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
-
-        header {
+        /* Filter Categories Bar */
+        .filter-container {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 22px 6%;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            background: rgba(8, 8, 8, 0.9);
-            backdrop-filter: blur(12px);
-            z-index: 100;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
         }
 
-        .logo {
-            font-family: 'Cinzel', serif;
-            font-size: 26px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            color: var(--text-main);
-            text-transform: uppercase;
-        }
-
-        .logo span {
-            color: var(--accent);
-        }
-
-        .cart-btn {
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 8px 18px;
+        .filter-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 10px 20px;
             border-radius: 30px;
             cursor: pointer;
-            font-weight: 600;
             font-size: 13px;
+            font-weight: 600;
             letter-spacing: 1px;
             transition: 0.3s;
         }
 
-        .cart-btn:hover {
-            background: var(--accent);
-            color: #000;
-            box-shadow: 0 0 15px var(--accent-glow);
-        }
-
-        /* Premium Hero Section with Background Image */
-        .hero {
-            position: relative;
-            text-align: center;
-            padding: 140px 20px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(8,8,8,0.95)), 
-                        url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .hero h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-            color: #fff;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
-        }
-
-        .hero h1 span {
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--accent);
             color: var(--accent);
-        }
-
-        .hero p {
-            color: #d0d0d0;
-            font-size: 18px;
-            max-width: 650px;
-            margin: 0 auto;
-            font-weight: 300;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 70px 20px;
-        }
-
-        .section-title {
-            font-family: 'Cinzel', serif;
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 35px;
-            letter-spacing: 2px;
-            text-align: center;
+            background: rgba(212, 175, 55, 0.05);
         }
 
         .products-grid {
@@ -540,6 +152,9 @@
             border-radius: 10px;
             overflow: hidden;
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .product-card:hover {
@@ -562,8 +177,15 @@
         .product-title {
             font-size: 17px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             letter-spacing: 0.5px;
+        }
+
+        .product-reviews {
+            color: var(--accent);
+            font-size: 12px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
         }
 
         .product-price {
@@ -704,11 +326,19 @@
 
     <section class="hero">
         <h1>Define Your <span>Time</span></h1>
-        <p>Explore luxury-inspired minimalist timepieces crafted for ultimate sophistication.</p>
+        <p>Explore curated luxury, mechanical, smart, and lifestyle timepieces.</p>
     </section>
 
     <div class="container">
-        <h2 class="section-title">FEATURED COLLECTIONS</h2>
+        <!-- Category Filter Buttons -->
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterProducts('all', this)">ALL COLLECTIONS</button>
+            <button class="filter-btn" onclick="filterProducts('mechanical', this)">MECHANICAL</button>
+            <button class="filter-btn" onclick="filterProducts('smartwatch', this)">SMARTWATCHES</button>
+            <button class="filter-btn" onclick="filterProducts('ladies', this)">LADIES</button>
+            <button class="filter-btn" onclick="filterProducts('kids', this)">KIDS</button>
+        </div>
+
         <div class="products-grid" id="productGrid">
             <!-- Dynamic Products -->
         </div>
@@ -746,37 +376,77 @@
             {
                 id: 1,
                 name: "Chronos Minimalist Black",
+                category: "mechanical",
                 price: "$49.00",
+                rating: "★★★★★ (14 reviews)",
                 image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80"
             },
             {
                 id: 2,
                 name: "Aura Rose Gold Edition",
+                category: "ladies",
                 price: "$65.00",
+                rating: "★★★★★ (28 reviews)",
                 image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80"
             },
             {
                 id: 3,
-                name: "Vanguard Silver Steel",
-                price: "$85.00",
+                name: "Vanguard Skeleton Mechanical",
+                category: "mechanical",
+                price: "$95.00",
+                rating: "★★★★★ (42 reviews)",
                 image: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 4,
+                name: "Nexus Ultra Smartwatch",
+                category: "smartwatch",
+                price: "$55.00",
+                rating: "★★★★★ (19 reviews)",
+                image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 5,
+                name: "Junior Sport Digital Watch",
+                category: "kids",
+                price: "$25.00",
+                rating: "★★★★★ (8 reviews)",
+                image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80"
             }
         ];
 
         let selectedProduct = "";
 
-        function displayProducts() {
+        function displayProducts(filteredList) {
             const grid = document.getElementById("productGrid");
-            grid.innerHTML = products.map(p => `
+            grid.innerHTML = filteredList.map(p => `
                 <div class="product-card">
-                    <img src="${p.image}" alt="${p.name}" class="product-img">
-                    <div class="product-info">
-                        <div class="product-title">${p.name}</div>
-                        <div class="product-price">${p.price}</div>
+                    <div>
+                        <img src="${p.image}" alt="${p.name}" class="product-img">
+                        <div class="product-info">
+                            <div class="product-title">${p.name}</div>
+                            <div class="product-reviews">${p.rating}</div>
+                            <div class="product-price">${p.price}</div>
+                        </div>
+                    </div>
+                    <div style="padding: 0 22px 22px 22px;">
                         <button class="buy-btn" onclick="openCheckout('${p.name}', '${p.price}')">BUY NOW</button>
                     </div>
                 </div>
             `).join('');
+        }
+
+        function filterProducts(category, btnElement) {
+            // Update active button styling
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            if (category === 'all') {
+                displayProducts(products);
+            } else {
+                const filtered = products.filter(p => p.category === category);
+                displayProducts(filtered);
+            }
         }
 
         function openCheckout(productName, productPrice) {
@@ -790,23 +460,24 @@
         }
 
         function openCart() {
-            alert("Click 'Buy Now' on any watch to place an order directly!");
+            alert("Click 'Buy Now' on any watch to place an order directly via WhatsApp!");
         }
 
         function submitOrder(e) {
             e.preventDefault();
-            const name = document.getElementById("custName", "").value;
+            const name = document.getElementById("custName").value;
             const phone = document.getElementById("custPhone").value;
             const address = document.getElementById("custAddress").value;
 
-            const myWhatsAppNumber = "1234567890"; 
+            const myWhatsAppNumber = "1234567890"; // Replace with your actual WhatsApp business number
             const message = `New Order for Wristly!%0A*Product:* ${selectedProduct}%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Address:* ${address}`;
             
             window.open(`https://wa.me/${myWhatsAppNumber}?text=${message}`, '_blank');
             closeModal();
         }
 
-        displayProducts();
+        // Initial load
+        displayProducts(products);
     </script>
 </body>
 </html>
