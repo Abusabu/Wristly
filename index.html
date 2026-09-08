@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wristly — Timeless Elegance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --card-bg: #161616;
+            --accent: #d4af37; /* Luxury Gold */
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --border: #262626;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .cart-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .cart-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(to bottom, #161616, var(--bg-color));
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            background: #202020;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .buy-btn {
+            width: 100%;
+            background: var(--text-main);
+            color: var(--bg-color);
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: var(--accent);
+        }
+
+        /* Modal / Checkout Screen Style */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--bg-color);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-main);
+            font-size: 14px;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .checkout-submit {
+            width: 100%;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Wrist<span>ly</span></div>
+        <button class="cart-btn" onclick="openCart()">Orders Info</button>
+    </header>
+
+    <section class="hero">
+        <h1>Define Your Time</h1>
+        <p>Explore luxury-inspired minimalist timepieces crafted for everyday elegance.</p>
+    </section>
+
+    <div class="container">
+        <h2 class="section-title">Featured Collections</h2>
+        <div class="products-grid" id="productGrid">
+            <!-- Products will load dynamically via JS -->
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h3 class="modal-title" id="modalProductTitle">Complete Your Order</h3>
+            <form id="orderForm" onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="custName" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number / WhatsApp</label>
+                    <input type="text" id="custPhone" required placeholder="+1 234 567 890">
+                </div>
+                <div class="form-group">
+                    <label>Shipping Address</label>
+                    <textarea id="custAddress" rows="3" required placeholder="Street, City, Country, Postal Code"></textarea>
+                </div>
+                <button type="submit" class="checkout-submit">Confirm Order</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Wristly. All rights reserved. Built with AI.
+    </footer>
+
+    <script>
+        // Product Database (You can add as many watches as you want here for free!)
+        const products = [
+            {
+                id: 1,
+                name: "Chronos Minimalist Black",
+                price: "$49.00",
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 2,
+                name: "Aura Rose Gold Edition",
+                price: "$65.00",
+                image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 3,
+                name: "Vanguard Silver Steel",
+                price: "$85.00",
+                image: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        let selectedProduct = "";
+
+        function displayProducts() {
+            const grid = document.getElementById("productGrid");
+            grid.innerHTML = products.map(p => `
+                <div class="product-card">
+                    <img src="${p.image}" alt="${p.name}" class="product-img">
+                    <div class="product-info">
+                        <div class="product-title">${p.name}</div>
+                        <div class="product-price">${p.price}</div>
+                        <button class="buy-btn" onclick="openCheckout('${p.name}', '${p.price}')">Buy Now</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openCheckout(productName, productPrice) {
+            selectedProduct = `${productName} (${productPrice})`;
+            document.getElementById("modalProductTitle").innerText = `Order: ${productName}`;
+            document.getElementById("checkoutModal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("checkoutModal").style.display = "none";
+        }
+
+        function openCart() {
+            alert("Click 'Buy Now' on any watch to place an order directly!");
+        }
+
+        function submitOrder(e) {
+            e.preventDefault();
+            const name = document.getElementById("custName").value;
+            const phone = document.getElementById("custPhone").value;
+            const address = document.getElementById("custAddress").value;
+
+            // Creates a pre-filled WhatsApp message format (You can replace this phone number with your actual WhatsApp business number)
+            const myWhatsAppNumber = "1234567890"; 
+            const message = `New Order for Wristly!%0A*Product:* ${selectedProduct}%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Address:* ${address}`;
+            
+            window.open(`https://wa.me/${myWhatsAppNumber}?text=${message}`, '_blank');
+            closeModal();
+        }
+
+        displayProducts();
+    </script>
+</body>
+</html>
