@@ -14,6 +14,7 @@
             --text-main: #ffffff;
             --text-muted: #a0a0a0;
             --border: #222222;
+            --sale-red: #ff4757;
         }
 
         * {
@@ -49,6 +50,7 @@
             letter-spacing: 3px;
             color: var(--text-main);
             text-transform: uppercase;
+            cursor: pointer;
         }
 
         .logo span {
@@ -112,7 +114,6 @@
             padding: 60px 20px;
         }
 
-        /* Filter Categories Bar */
         .filter-container {
             display: flex;
             justify-content: center;
@@ -155,6 +156,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
         }
 
         .product-card:hover {
@@ -163,11 +165,37 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .product-img {
+        .sale-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--sale-red);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 4px;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        .product-img-wrapper {
             width: 100%;
             height: 300px;
-            object-fit: cover;
+            overflow: hidden;
             background: #181818;
+            cursor: pointer;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
         }
 
         .product-info {
@@ -179,6 +207,11 @@
             font-weight: 600;
             margin-bottom: 6px;
             letter-spacing: 0.5px;
+            cursor: pointer;
+        }
+
+        .product-title:hover {
+            color: var(--accent);
         }
 
         .product-reviews {
@@ -188,34 +221,198 @@
             letter-spacing: 1px;
         }
 
+        .price-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
         .product-price {
             color: var(--accent);
             font-size: 18px;
             font-weight: 700;
-            margin-bottom: 18px;
+        }
+
+        .original-price {
+            color: var(--text-muted);
+            font-size: 14px;
+            text-decoration: line-through;
+        }
+
+        .card-buttons {
+            display: flex;
+            gap: 10px;
+            padding: 0 22px 22px 22px;
+        }
+
+        .details-btn {
+            flex: 1;
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 11px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .details-btn:hover {
+            border-color: var(--text-main);
+            color: var(--text-main);
         }
 
         .buy-btn {
-            width: 100%;
-            background: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--text-main);
-            padding: 12px;
+            flex: 1;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 11px;
             border-radius: 6px;
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 13px;
             letter-spacing: 1px;
             cursor: pointer;
             transition: 0.3s;
         }
 
         .buy-btn:hover {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: #000;
+            opacity: 0.9;
+            box-shadow: 0 0 12px var(--accent-glow);
         }
 
-        /* Modal Style */
+        .detail-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .detail-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @media (max-width: 768px) {
+            .detail-content {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+
+        .detail-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .detail-close:hover {
+            color: var(--text-main);
+        }
+
+        .gallery-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .main-preview-img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #181818;
+            border: 1px solid var(--border);
+        }
+
+        .thumbnail-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .thumb-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+
+        .thumb-img:hover, .thumb-img.active-thumb {
+            opacity: 1;
+            border-color: var(--accent);
+        }
+
+        .detail-info-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .detail-title {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .detail-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin: 15px 0;
+            line-height: 1.7;
+        }
+
+        .specs-list {
+            margin: 15px 0;
+            list-style: none;
+        }
+
+        .specs-list li {
+            font-size: 13px;
+            color: var(--text-muted);
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .specs-list li span {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -226,7 +423,7 @@
             background: rgba(0,0,0,0.85);
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 1100;
             backdrop-filter: blur(8px);
         }
 
@@ -320,8 +517,8 @@
 <body>
 
     <header>
-        <div class="logo">Wrist<span>ly</span></div>
-        <button class="cart-btn" onclick="openCart()">ORDERS INFO</button>
+        <div class="logo" onclick="filterProducts('all', document.querySelector('.filter-btn'))">Wrist<span>ly</span></div>
+        <button class="cart-btn" onclick="alert('Click any product and press Buy Now to order via WhatsApp!')">ORDERS INFO</button>
     </header>
 
     <section class="hero">
@@ -330,7 +527,6 @@
     </section>
 
     <div class="container">
-        <!-- Category Filter Buttons -->
         <div class="filter-container">
             <button class="filter-btn active" onclick="filterProducts('all', this)">ALL COLLECTIONS</button>
             <button class="filter-btn" onclick="filterProducts('mechanical', this)">MECHANICAL</button>
@@ -344,10 +540,15 @@
         </div>
     </div>
 
+    <!-- Product Detail Modal -->
+    <div class="detail-modal" id="productDetailModal">
+        <div class="detail-content" id="detailModalBody"></div>
+    </div>
+
     <!-- Checkout Modal -->
     <div class="modal" id="checkoutModal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <button class="modal-close" onclick="closeCheckout()">&times;</button>
             <h3 class="modal-title" id="modalProductTitle">Complete Order</h3>
             <form id="orderForm" onsubmit="submitOrder(event)">
                 <div class="form-group">
@@ -378,58 +579,126 @@
                 name: "Chronos Minimalist Black",
                 category: "mechanical",
                 price: "$49.00",
+                originalPrice: "$98.00",
+                discount: "50% OFF",
                 rating: "★★★★★ (14 reviews)",
-                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80"
+                description: "Crafted for the modern gentleman, the Chronos Minimalist features a sleek matte black dial paired with ultra-durable stainless steel casing.",
+                images: [
+                    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=800&q=80"
+                ],
+                specs: {
+                    "Movement": "Japanese Quartz",
+                    "Water Resistance": "3 ATM / 30 Meters",
+                    "Strap Material": "Genuine Leather",
+                    "Case Diameter": "42mm"
+                }
             },
             {
                 id: 2,
                 name: "Aura Rose Gold Edition",
                 category: "ladies",
-                price: "$65.00",
+                price: "$35.00",
+                originalPrice: "$70.00",
+                discount: "50% OFF",
                 rating: "★★★★★ (28 reviews)",
-                image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80"
+                description: "An epitome of elegance, the Aura Rose Gold brings refined feminine aesthetics with a shimmering dial finish and a delicate mesh bracelet.",
+                images: [
+                    "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80"
+                ],
+                specs: {
+                    "Movement": "Quartz",
+                    "Water Resistance": "Splash Proof",
+                    "Strap Material": "Stainless Steel Mesh",
+                    "Case Diameter": "36mm"
+                }
             },
             {
                 id: 3,
                 name: "Vanguard Skeleton Mechanical",
                 category: "mechanical",
-                price: "$95.00",
+                price: "$59.00",
+                originalPrice: "$120.00",
+                discount: "50% OFF",
                 rating: "★★★★★ (42 reviews)",
-                image: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=600&q=80"
+                description: "Witness the complex machinery in action. The Vanguard Skeleton exposes the intricate automatic movement with dual-sapphire crystal displays.",
+                images: [
+                    "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80"
+                ],
+                specs: {
+                    "Movement": "Automatic Mechanical",
+                    "Water Resistance": "5 ATM / 50 Meters",
+                    "Strap Material": "Heavy Stainless Steel",
+                    "Case Diameter": "44mm"
+                }
             },
             {
                 id: 4,
                 name: "Nexus Ultra Smartwatch",
                 category: "smartwatch",
-                price: "$55.00",
+                price: "$45.00",
+                originalPrice: "$90.00",
+                discount: "50% OFF",
                 rating: "★★★★★ (19 reviews)",
-                image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80"
+                description: "High-definition retina touch display paired with full health tracking, heart rate monitors, and customizable luxury watch faces.",
+                images: [
+                    "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80"
+                ],
+                specs: {
+                    "Display": "HD AMOLED Touch",
+                    "Battery Life": "Up to 7 Days",
+                    "Compatibility": "iOS & Android",
+                    "Connectivity": "Bluetooth 5.2"
+                }
             },
             {
                 id: 5,
                 name: "Junior Sport Digital Watch",
                 category: "kids",
-                price: "$25.00",
+                price: "$19.00",
+                originalPrice: "$38.00",
+                discount: "50% OFF",
                 rating: "★★★★★ (8 reviews)",
-                image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80"
+                description: "Rugged, colorful, and built for daily adventures. Shock-resistant build designed specifically for active youngsters.",
+                images: [
+                    "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80"
+                ],
+                specs: {
+                    "Display": "Digital LED",
+                    "Material": "Eco-friendly Silicone",
+                    "Water Resistance": "Daily Waterproof",
+                    "Special Feature": "Shock Resistant"
+                }
             }
         ];
 
-        let selectedProduct = "";
+        let selectedProductString = "";
 
         function displayProducts(filteredList) {
             const grid = document.getElementById("productGrid");
             grid.innerHTML = filteredList.map(p => `
                 <div class="product-card">
+                    <div class="sale-badge">${p.discount}</div>
                     <div>
-                        <img src="${p.image}" alt="${p.name}" class="product-img">
+                        <div class="product-img-wrapper" onclick="openProductDetail(${p.id})">
+                            <img src="${p.images[0]}" alt="${p.name}" class="product-img">
+                        </div>
                         <div class="product-info">
-                            <div class="product-title">${p.name}</div>
+                            <div class="product-title" onclick="openProductDetail(${p.id})">${p.name}</div>
                             <div class="product-reviews">${p.rating}</div>
-                            <div class="product-price">${p.price}</div>
+                            <div class="price-container">
+                                <span class="product-price">${p.price}</span>
+                                <span class="original-price">${p.originalPrice}</span>
+                            </div>
                         </div>
                     </div>
-                    <div style="padding: 0 22px 22px 22px;">
+                    <div class="card-buttons">
+                        <button class="details-btn" onclick="openProductDetail(${p.id})">DETAILS</button>
                         <button class="buy-btn" onclick="openCheckout('${p.name}', '${p.price}')">BUY NOW</button>
                     </div>
                 </div>
@@ -437,7 +706,6 @@
         }
 
         function filterProducts(category, btnElement) {
-            // Update active button styling
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             btnElement.classList.add('active');
 
@@ -449,18 +717,67 @@
             }
         }
 
+        function openProductDetail(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const modalBody = document.getElementById("detailModalBody");
+            
+            let specsHtml = Object.entries(product.specs).map(([key, val]) => `
+                <li>${key} <span>${val}</span></li>
+            `).join('');
+
+            let thumbnailsHtml = product.images.map((img, index) => `
+                <img src="${img}" class="thumb-img ${index === 0 ? 'active-thumb' : ''}" onclick="changeMainImage('${img}', this)">
+            `).join('');
+
+            modalBody.innerHTML = `
+                <button class="detail-close" onclick="closeProductDetail()">&times;</button>
+                <div class="gallery-section">
+                    <img src="${product.images[0]}" id="mainPreview" class="main-preview-img" alt="${product.name}">
+                    <div class="thumbnail-row">
+                        ${thumbnailsHtml}
+                    </div>
+                </div>
+                <div class="detail-info-section">
+                    <div>
+                        <div class="sale-badge" style="position:relative; display:inline-block; margin-bottom:10px;">${product.discount}</div>
+                        <h2 class="detail-title">${product.name}</h2>
+                        <div class="product-reviews">${product.rating}</div>
+                        <div class="price-container" style="margin-top:10px;">
+                            <span class="product-price" style="font-size:24px;">${product.price}</span>
+                            <span class="original-price" style="font-size:16px;">${product.originalPrice}</span>
+                        </div>
+                        <p class="detail-desc">${product.description}</p>
+                        <ul class="specs-list">
+                            ${specsHtml}
+                        </ul>
+                    </div>
+                    <button class="checkout-submit" onclick="closeProductDetail(); openCheckout('${product.name}', '${product.price}')">BUY NOW VIA WHATSAPP</button>
+                </div>
+            `;
+
+            document.getElementById("productDetailModal").style.display = "flex";
+        }
+
+        function changeMainImage(imgSrc, thumbElement) {
+            document.getElementById("mainPreview").src = imgSrc;
+            document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active-thumb'));
+            thumbElement.classList.add('active-thumb');
+        }
+
+        function closeProductDetail() {
+            document.getElementById("productDetailModal").style.display = "none";
+        }
+
         function openCheckout(productName, productPrice) {
-            selectedProduct = `${productName} (${productPrice})`;
+            selectedProductString = `${productName} (${productPrice})`;
             document.getElementById("modalProductTitle").innerText = `Order: ${productName}`;
             document.getElementById("checkoutModal").style.display = "flex";
         }
 
-        function closeModal() {
+        function closeCheckout() {
             document.getElementById("checkoutModal").style.display = "none";
-        }
-
-        function openCart() {
-            alert("Click 'Buy Now' on any watch to place an order directly via WhatsApp!");
         }
 
         function submitOrder(e) {
@@ -469,14 +786,13 @@
             const phone = document.getElementById("custPhone").value;
             const address = document.getElementById("custAddress").value;
 
-            const myWhatsAppNumber = "1234567890"; // Replace with your actual WhatsApp business number
-            const message = `New Order for Wristly!%0A*Product:* ${selectedProduct}%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Address:* ${address}`;
+            const myWhatsAppNumber = "1234567890"; 
+            const message = `New Order for Wristly!%0A*Product:* ${selectedProductString}%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Address:* ${address}`;
             
             window.open(`https://wa.me/${myWhatsAppNumber}?text=${message}`, '_blank');
-            closeModal();
+            closeCheckout();
         }
 
-        // Initial load
         displayProducts(products);
     </script>
 </body>
